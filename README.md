@@ -26,7 +26,7 @@ npm install  # or yarn install
 
 npm run dev  # or yarn dev
 
-This will start the project at http://localhost:3000/.
+This will start the project at http://localhost:5000/.
 
 🛠️ Tech Stack & Design Decisions
 
