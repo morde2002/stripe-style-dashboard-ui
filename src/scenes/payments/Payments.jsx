@@ -12,11 +12,11 @@ import {
   Select,
   MenuItem,
   TablePagination,
-  CircularProgress, // ✅ Import CircularProgress
+  CircularProgress,
+  useTheme,
 } from "@mui/material";
-import Header from "../../components/Header"; // Import header component
+import Header from "../../components/Header";
 
-// Mock Payment Data
 const mockPayments = [
   { id: "txn_001", date: "2024-03-01", customer: "Alice Smith", amount: 12500, status: "succeeded" },
   { id: "txn_002", date: "2024-03-02", customer: "Bob Johnson", amount: 8500, status: "failed" },
@@ -26,22 +26,21 @@ const mockPayments = [
 ];
 
 const Payments = () => {
-  const [loading, setLoading] = useState(true); // ✅ Add loading state
+  const theme = useTheme();
+  const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("all");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
 
-  // Simulate data fetching
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false); // ✅ Hide spinner after 2 seconds
+      setLoading(false);
     }, 2000);
   }, []);
 
-  // Filter payments based on status
-  const filteredPayments = statusFilter === "all" ? mockPayments : mockPayments.filter((p) => p.status === statusFilter);
+  const filteredPayments =
+    statusFilter === "all" ? mockPayments : mockPayments.filter((p) => p.status === statusFilter);
 
-  // Handle pagination
   const handleChangePage = (event, newPage) => setPage(newPage);
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
@@ -52,7 +51,6 @@ const Payments = () => {
     <Box m="20px">
       <Header title="Payments" subtitle="Manage and track customer transactions" />
 
-      {/* Status Filter Dropdown */}
       <Box mb={2} display="flex" justifyContent="flex-end">
         <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
           <MenuItem value="all">All</MenuItem>
@@ -61,16 +59,23 @@ const Payments = () => {
         </Select>
       </Box>
 
-      {/* Show Spinner When Loading */}
       {loading ? (
         <Box display="flex" justifyContent="center" alignItems="center" height="300px">
-          <CircularProgress />
+          <CircularProgress sx={{ color: theme.palette.mode === "light" ? "#333" : "#ddd" }} />
         </Box>
       ) : (
-        <TableContainer component={Paper} sx={{ backgroundColor: "#151632" }}>
+        <TableContainer
+          component={Paper}
+          sx={{
+            backgroundColor: theme.palette.mode === "dark" ? "#151632" : "#f5f5f5",
+            boxShadow: theme.palette.mode === "light" ? "0px 4px 10px rgba(0,0,0,0.1)" : "none",
+            borderRadius: "8px",
+            overflow: "hidden",
+          }}
+        >
           <Table>
             <TableHead>
-              <TableRow>
+              <TableRow sx={{ backgroundColor: theme.palette.mode === "light" ? "#e0e0e0" : "#222" }}>
                 <TableCell><strong>Date</strong></TableCell>
                 <TableCell><strong>Customer</strong></TableCell>
                 <TableCell><strong>Amount ($)</strong></TableCell>
@@ -91,7 +96,6 @@ const Payments = () => {
             </TableBody>
           </Table>
 
-          {/* Pagination */}
           <TablePagination
             rowsPerPageOptions={[3, 5, 10]}
             component="div"

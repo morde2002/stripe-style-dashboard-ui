@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme"; // Ensure your theme has proper colors for light and dark mode
 import { mockTransactions } from "../../data/mockData";
@@ -5,18 +6,43 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
-import GeographyChart from "../../components/GeographyChart";
-import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { CircularProgress } from "@mui/material";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode); // Assuming tokens have light and dark mode color adjustments
   const isSmallScreen = useMediaQuery("(max-width: 960px)");
+  const [loading, setLoading] = useState(true);
   const totalRevenue = mockTransactions.reduce((acc, txn) => acc + parseFloat(txn.cost), 0);
 
+  useEffect(() => {
+    setTimeout(() => {
+    setLoading(false);
+    }, 2000); // Simulating a 2-second loading delay
+    }, []);
+
+    if (loading) {
+      return (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
+          width="100vw"
+          position="fixed"
+          top={0}
+          left={0}
+          zIndex={9999}
+          bgcolor="rgba(255, 255, 255, 0.8)" // Optional background overlay
+        >
+          <CircularProgress sx={{ color: colors.greenAccent[500] }} />
+        </Box>
+      );
+    }
+    
 
   return (
     <Box m={isSmallScreen ? "10px" : "20px"}>

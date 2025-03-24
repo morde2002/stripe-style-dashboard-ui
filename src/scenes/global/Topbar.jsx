@@ -36,10 +36,15 @@ const Topbar = ({ handleSidebarToggle }) => {
       sx={{
         position: "sticky",
         top: 0,
-        backgroundColor: "rgba(31, 42, 64, 0.7)", // 70% visible (30% transparent)
-        backdropFilter: "blur(8px)", // Adds a subtle blur effect
+        backgroundColor: theme.palette.mode === "dark" 
+          ? "rgba(31, 42, 64, 0.7)"  // Keep dark mode styling
+          : "rgba(255, 255, 255, 0.8)", // Light mode: Soft white with transparency
+        backdropFilter: "blur(10px)", // More blur for a polished effect
+        boxShadow: theme.palette.mode === "light" 
+          ? "0px 4px 10px rgba(0, 0, 0, 0.1)" // Subtle shadow in light mode
+          : "none", // No shadow in dark mode
         zIndex: 1100,
-      }}
+      }}      
     >
 
       {/* SEARCH BAR */}
