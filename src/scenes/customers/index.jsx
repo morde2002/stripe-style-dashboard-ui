@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -20,6 +20,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataCustomers } from "../../data/mockData";
 import Header from "../../components/Header";
+import { CircularProgress } from "@mui/material";
 
 const Customers = () => {
   const theme = useTheme();
@@ -27,6 +28,13 @@ const Customers = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+  setTimeout(() => {
+  setLoading(false);
+  }, 2000);
+  }, []);
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -62,6 +70,13 @@ const Customers = () => {
       customer.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  if (loading) {
+      return (
+        <Box display="flex" justifyContent="center" alignItems="center" height="300px" >
+          <CircularProgress sx={{ color: theme.palette.mode === "light" ? "#333" : "#ddd" }} />
+        </Box>
+      );
+    }
   return (
     <Box m="20px">
       <Header title="CUSTOMERS" subtitle="List of customers and their spending" />
