@@ -28,6 +28,7 @@ const BarChart = ({ isDashboard = false }) => {
               strokeWidth: 1,
             },
             text: {
+              fontSize: window.innerWidth < 600 ? 10 : 12, // ✅ Adjust font size
               fill: colors.grey[100],
             },
           },
@@ -54,7 +55,7 @@ const BarChart = ({ isDashboard = false }) => {
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
-        tickRotation: 0,
+        tickRotation: 45,  // ✅ Rotate labels to 45 degrees
         legend: isDashboard ? undefined : "Country", // ✅ Updated label
         legendPosition: "middle",
         legendOffset: 32,
