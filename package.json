@@ -2,7 +2,7 @@
   "name": "react-admin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://morde2002.github.io/stripe-style-dashboard-ui",
+  "homepage": "https://morde2002.github.io/stripe-style-dashboard-ui/dashboard",
 
   "dependencies": {
     "@emotion/react": "^11.10.4",
