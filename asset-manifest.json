@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/stripe-style-dashboard-ui/static/css/main.08ca7eda.css",
+    "main.js": "/stripe-style-dashboard-ui/static/js/main.067322fe.js",
+    "index.html": "/stripe-style-dashboard-ui/index.html",
+    "main.08ca7eda.css.map": "/stripe-style-dashboard-ui/static/css/main.08ca7eda.css.map",
+    "main.067322fe.js.map": "/stripe-style-dashboard-ui/static/js/main.067322fe.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.08ca7eda.css",
+    "static/js/main.067322fe.js"
+  ]
+}
